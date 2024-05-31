@@ -6,19 +6,19 @@ WORKDIR /app
 
 # Copy package.json and package-lock.json before other files
 # Utilise Docker cache to save re-installing dependencies if unchanged
-COPY package.json yarn.lock ./
+COPY package.json ./
 
 # Install dependencies
-RUN yarn install --frozen-lockfile
+RUN npm install
 
 # Copy all files
 COPY . .
 
 # Build the Next.js app
-RUN yarn build
+RUN npm run build
 
 # Expose the listening port
 EXPOSE 8002
 
 # Run yarn start to start the app
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
